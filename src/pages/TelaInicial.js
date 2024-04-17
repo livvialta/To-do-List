@@ -1,23 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text, Button, FlatList } from 'react-native';
 
 const TelaInicial = ({ navigation }) => {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([
+    { id: 1, nome: 'Tarefa 1', descricao: 'Descrição da tarefa 1', preco: 10 },
+    { id: 2, nome: 'Tarefa 2', descricao: 'Descrição da tarefa 2', preco: 20 },
+    { id: 3, nome: 'Tarefa 3', descricao: 'Descrição da tarefa 3', preco: 30 },
+  ]);
 
-  // Simulação de tarefas iniciais
-  useEffect(() => {
-    // Aqui você pode buscar as tarefas da API
-    // Exemplo de simulação:
-    setTasks([
-      { id: 1, nome: 'Tarefa 1', descricao: 'Descrição da Tarefa 1', preco: 'R$ 10,00' },
-      { id: 2, nome: 'Tarefa 2', descricao: 'Descrição da Tarefa 2', preco: 'R$ 15,00' },
-    ]);
-  }, []);
-
+  // Função para adicionar uma nova tarefa
   const adicionarTarefa = () => {
-    navigation.navigate('Formulario');
+    navigation.navigate('Formulário');
   };
 
+  // Função para visualizar os detalhes de uma tarefa
   const verDetalhes = (task) => {
     navigation.navigate('Detalhes', { task });
   };
@@ -28,7 +24,7 @@ const TelaInicial = ({ navigation }) => {
         data={tasks}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <View>
+          <View style={{ marginBottom: 20 }}>
             <Text>Nome: {item.nome}</Text>
             <Text>Descrição: {item.descricao}</Text>
             <Text>Preço: {item.preco}</Text>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
 
 const DetalhesTarefa = ({ route, navigation }) => {
   const { task } = route.params;
