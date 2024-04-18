@@ -6,17 +6,22 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 
 const Login = ({ navigation }) => {
+        // Estados para controlar o email, senha e mensagem de erro de login
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorLogin, setErrorLogin] = useState(""); 
 
     const auth = FIREBASE_AUTH;
 
+    // Função assíncrona para efetuar o login do usuário
     const signIn = async () => {
         try {
+            // Efetua o login com o email e senha fornecidos
             const response = await signInWithEmailAndPassword(auth, email, password);
+            // Navega para a tela "Home" com o ID do usuário autenticado
             navigation.navigate("Home", { idUser: response.user.uid });
             console.log(response);
+        // Em caso de erro, exibe uma mensagem de alerta
         } catch (error) {
             console.log(error);
             setErrorLogin(true); 
@@ -24,6 +29,8 @@ const Login = ({ navigation }) => {
         } finally {
         }
     };
+
+    // Retorna a interface do usuário
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? "padding" : "height"} style={styles.container}>

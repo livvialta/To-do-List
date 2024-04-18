@@ -10,9 +10,13 @@ const firebaseConfig = {
   messagingSenderId: "639025513123",
   appId: "1:639025513123:web:edc7ad105e603ab7ee7516",
   measurementId: "G-7J2GGQPJTC"
-  };
-  
+};
 
+// Inicializa o aplicativo Firebase
 export const FIREBASE_APP = initializeApp(firebaseConfig);
+
+// Obtém o objeto de autenticação do Firebase
 export const FIREBASE_AUTH = getAuth(FIREBASE_APP);
+
+// Obtém o objeto do banco de dados Firestore do Firebase
 export const FIREBASE_DB = getFirestore(FIREBASE_APP);

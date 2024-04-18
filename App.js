@@ -7,12 +7,15 @@ import TelaInicial from './src/pages/TelaInicial';
 import Formulario from './src/pages/Formulario';
 import DetalhesTarefa from './src/pages/DetalhesItem';
 
+// Cria uma pilha de navegação
 const Stack = createStackNavigator();
 
+// Componente principal do aplicativo
 function App() {
   return (
     <NavigationContainer>
-       <Stack.Navigator initialRouteName="Formulario">
+      {/* Define a pilha de navegação com as telas */}
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Cadastro" component={Cadastro} />
         <Stack.Screen name="Home" component={TelaInicial} />
@@ -24,4 +27,3 @@ function App() {
 }
 
 export default App;
-

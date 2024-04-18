@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Switch, StyleSheet } from 'react-native';
 
+// Componente AdicionarTarefa
 const AdicionarTarefa = ({ navigation }) => {
+  // Estados para armazenar os dados da nova tarefa
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
   const [preco, setPreco] = useState('');
   const [concluido, setConcluido] = useState(false);
 
+  // Função para adicionar a nova tarefa
   const adicionarTarefa = () => {
     // Aqui você pode enviar os dados para a API para adicionar a nova tarefa
     const novaTarefa = { nome, descricao, preco, concluido };
@@ -18,6 +21,7 @@ const AdicionarTarefa = ({ navigation }) => {
     setConcluido(false);
   };
 
+  // Retorna a interface do usuário
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Nome da Tarefa:</Text>
@@ -51,6 +55,7 @@ const AdicionarTarefa = ({ navigation }) => {
   );
 };
 
+// Estilos CSS para o componente
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -78,4 +83,5 @@ const styles = StyleSheet.create({
   },
 });
 
+// Exporta o componente AdicionarTarefa
 export default AdicionarTarefa;
