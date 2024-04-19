@@ -40,7 +40,7 @@ const TelaInicial = ({ navigation }) => {
           <View style={{ marginBottom: 20 }}>
             <Text>Nome: {item.Title}</Text>
             <Text>Descrição: {item.Description}</Text>
-            <Text>Preço: {item.Price}</Text>
+            <Text>Preço: {item.Price}</Text>  
             {/* Botão para visualizar detalhes da tarefa */}
             <Button title="Detalhes" onPress={() => verDetalhes(item)} />
           </View>
