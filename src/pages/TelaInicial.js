@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Button, FlatList } from 'react-native';
+import axios from 'axios';
 
-// Componente TelaInicial
 const TelaInicial = ({ navigation }) => {
-  // Estado para armazenar as tarefas
-  const [tasks, setTasks] = useState([
-    { id: 1, nome: 'Tarefa 1', descricao: 'Descrição da tarefa 1', preco: 10, concluida: true },
-    { id: 2, nome: 'Tarefa 2', descricao: 'Descrição da tarefa 2', preco: 2, concluida: false },
-    { id: 3, nome: 'Tarefa 3', descricao: 'Descrição da tarefa 3', preco: 30, concluida: true},
-  ]);
+  const [tasks, setTasks] = useState([]); // Estado para armazenar as tarefas
+
+  useEffect(() => {
+    // Função para buscar as tarefas da API quando o componente for montado
+    const fetchTasks = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/'); 
+        setTasks(response.data); // Atualiza o estado com as tarefas recebidas da API
+      } catch (error) {
+        console.error('Erro ao buscar tarefas:', error);
+      }
+    };
+
+    fetchTasks(); // Chama a função fetchTasks para buscar as tarefas ao montar o componente
+  }, []); // O segundo argumento vazio [] garante que esta função será executada apenas uma vez ao montar o componente
 
   // Função para adicionar uma nova tarefa
   const adicionarTarefa = () => {
@@ -29,9 +38,9 @@ const TelaInicial = ({ navigation }) => {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={{ marginBottom: 20 }}>
-            <Text>Nome: {item.nome}</Text>
-            <Text>Descrição: {item.descricao}</Text>
-            <Text>Preço: {item.preco}</Text>
+            <Text>Nome: {item.Title}</Text>
+            <Text>Descrição: {item.Description}</Text>
+            <Text>Preço: {item.Price}</Text>
             {/* Botão para visualizar detalhes da tarefa */}
             <Button title="Detalhes" onPress={() => verDetalhes(item)} />
           </View>

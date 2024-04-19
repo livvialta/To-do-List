@@ -6,6 +6,7 @@ import Cadastro from './src/pages/Cadastro';
 import TelaInicial from './src/pages/TelaInicial';
 import Formulario from './src/pages/Formulario';
 import DetalhesTarefa from './src/pages/DetalhesItem';
+import Atualizar from './src/pages/AtualizarItem';
 
 // Cria uma pilha de navegação
 const Stack = createStackNavigator();
@@ -21,6 +22,7 @@ function App() {
         <Stack.Screen name="Home" component={TelaInicial} />
         <Stack.Screen name="Formulário" component={Formulario} />
         <Stack.Screen name="Detalhes" component={DetalhesTarefa} />
+        <Stack.Screen name="Atualizar" component={Atualizar} />
       </Stack.Navigator>
     </NavigationContainer>
   );

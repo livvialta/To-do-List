@@ -3,7 +3,7 @@ import { View, Text, TextInput, Button, Switch, StyleSheet } from 'react-native'
 import axios from 'axios';
 
 // Componente AdicionarTarefa
-const AdicionarTarefa = ({ navigation }) => {
+const AtualizarTarefa = ({ navigation }) => {
   // Estados para armazenar os dados da nova tarefa
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
@@ -11,21 +11,18 @@ const AdicionarTarefa = ({ navigation }) => {
   const [concluido, setConcluido] = useState(false);
 
   // Função para adicionar a nova tarefa
-  const adicionarTarefa = async () => {
+  const atualizarTarefa = async () => {
     try {
       // Enviar os dados da nova tarefa para a API
-      const response = await axios.post('http://127.0.0.1:8000/api/create', {
+      const response = await axios.put(`http://127.0.0.1:8000/api/delete/${task.id}`, {
         Title: nome,
         Description: descricao,
         Price: preco,
         Completed: concluido
       });
-      console.log('Nova tarefa criada:', response.data);
-      // Resetar os campos após adicionar a tarefa
-      setNome('');
-      setDescricao('');
-      setPreco('');
-      setConcluido(false);
+      console.log('Atualizar a tarefa:', response.data);
+      // Redireciona de volta para a tela anterior após a exclusão
+      navigation.goBack();
     } catch (error) {
       console.error('Erro ao criar tarefa:', error);
     }
@@ -60,7 +57,7 @@ const AdicionarTarefa = ({ navigation }) => {
           onValueChange={value => setConcluido(value)}
         />
       </View>
-      <Button title="Adicionar Tarefa" onPress={adicionarTarefa} />
+      <Button title="Atualizar Tarefa" onPress={atualizarTarefa} />
     </View>
   );
 };
@@ -94,4 +91,4 @@ const styles = StyleSheet.create({
 });
 
 // Exporta o componente AdicionarTarefa
-export default AdicionarTarefa;
+export default AtualizarTarefa;

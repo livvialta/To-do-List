@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet, Switch } from 'react-native';
+import axios from 'axios';
 
 // Componente DetalhesTarefa
 const DetalhesTarefa = ({ route, navigation }) => {
@@ -11,34 +12,30 @@ const DetalhesTarefa = ({ route, navigation }) => {
 
   // Função para editar a tarefa
   const editarTarefa = () => {
-    // Lógica para editar a tarefa
-    navigation.navigate('');
+    navigation.navigate('Atualizar');
   };
 
   // Função para deletar a tarefa
-  const deletarTarefa = () => {
-    // Lógica para deletar a tarefa
-    navigation.goBack();
+  const deletarTarefa = async () => {
+    try {
+      // Faz uma solicitação DELETE para a API para excluir a tarefa com base no ID
+      await axios.delete(`http://127.0.0.1:8000/api/delete/${task.id}`);
+      // Redireciona de volta para a tela anterior após a exclusão
+      navigation.goBack();
+    } catch (error) {
+      console.error('Erro ao excluir a tarefa:', error);
+    }
   };
 
-  // Função para alternar o estado de conclusão da tarefa
-  const toggleConcluida = () => {
-    setConcluida(!concluida);
-    // Aqui você pode adicionar lógica para atualizar o estado da tarefa no banco de dados, por exemplo.
-  };
 
   // Retorna a interface do usuário
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Nome: {task.nome}</Text>
-      <Text>Descrição: {task.descricao}</Text>
-      <Text>Preço: {task.preco}</Text>
+      <Text>Nome: {task.Title}</Text>
+      <Text>Descrição: {task.Description}</Text>
+      <Text>Preço: {task.Price}</Text>
       <View style={styles.switchContainer}>
-        <Text>Concluída:</Text>
-        <Switch
-          value={concluida}
-          onValueChange={toggleConcluida}
-        />
+        <Text>Concluída: {concluida ? 'Sim' : 'Não'}</Text>
       </View>
       <Button title="Editar" onPress={editarTarefa} />
       <Button title="Deletar" onPress={deletarTarefa} />
